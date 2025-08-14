@@ -1,7 +1,7 @@
 
 self.addEventListener('install', function(e) {
   e.waitUntil(
-    caches.open('nyc-itinerary').then(function(cache) {
+    caches.open('nyc-trip').then(function(cache) {
       return cache.addAll([
         'index.html',
         'manifest.json',
