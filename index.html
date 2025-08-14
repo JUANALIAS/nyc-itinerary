@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title>Itinerario NYC</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="manifest" href="manifest.json" />
+    <title>NYC Trip Itinerary</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json">
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
         #map { height: 100vh; }
@@ -12,19 +13,30 @@
 </head>
 <body>
     <div id="map"></div>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('service-worker.js');
-        }
-
         var map = L.map('map').setView([40.758, -73.9855], 13);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
+            attribution: 'Map data © OpenStreetMap contributors'
         }).addTo(map);
 
-        var marker = L.marker([40.758, -73.9855]).addTo(map);
-        marker.bindPopup("Hotel Riu Plaza Manhattan Times Square").openPopup();
+        var itinerary = [
+            { day: "Lunes 18", name: "Hotel Riu Plaza", lat: 40.7590, lon: -73.9845 },
+            { day: "Martes 19", name: "SUMMIT One Vanderbilt", lat: 40.7527, lon: -73.9787 },
+            { day: "Miércoles 20", name: "Juliana’s Pizza", lat: 40.7027, lon: -73.9936 },
+            { day: "Jueves 21", name: "Estatua de la Libertad", lat: 40.6892, lon: -74.0445 },
+            { day: "Viernes 22", name: "Museo Metropolitano", lat: 40.7794, lon: -73.9632 },
+            { day: "Sábado 23", name: "Coney Island", lat: 40.5749, lon: -73.9850 },
+            { day: "Domingo 24", name: "MoMA", lat: 40.7614, lon: -73.9776 },
+            { day: "Lunes 25", name: "Escaleras de Joker", lat: 40.8352, lon: -73.9249 },
+            { day: "Martes 26", name: "Yankee Stadium", lat: 40.8296, lon: -73.9262 },
+            { day: "Miércoles 27", name: "Madison Square Garden", lat: 40.7505, lon: -73.9934 },
+            { day: "Jueves 28", name: "Central Park", lat: 40.7644, lon: -73.9738 }
+        ];
+
+        itinerary.forEach(function(item) {
+            L.marker([item.lat, item.lon]).addTo(map)
+                .bindPopup("<b>" + item.day + "</b><br>" + item.name);
+        });
     </script>
 </body>
 </html>
